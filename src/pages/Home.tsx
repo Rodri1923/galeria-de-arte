@@ -12,6 +12,10 @@ function Home() {
       <GalleryNav />
 
       <main>
+      <h1 className="text-red-500 text-5xl bg-yellow-200">
+        Test Tailwind
+      </h1>
+
         <HeroSection />
         <IntroSection />
         <FeaturedSection />
