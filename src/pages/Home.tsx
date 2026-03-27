@@ -1,10 +1,19 @@
+import GalleryNav from '../components/GalleryNav'
 import GallerySection from '../components/GallerySection'
+import HeroSection from '../components/HeroSection'
+import IntroSection from '../components/IntroSection'
 
 function Home() {
   return (
-    <main>
-      <GallerySection />
-    </main>
+    <>
+      <GalleryNav />
+
+      <main>
+        <HeroSection />
+        <IntroSection />
+        <GallerySection />
+      </main>
+    </>
   )
 }
 

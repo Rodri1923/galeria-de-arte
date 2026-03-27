@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import type { Artwork } from '../types/artwork'
 
 interface ArtworkLightboxProps {
@@ -6,6 +7,21 @@ interface ArtworkLightboxProps {
 }
 
 function ArtworkLightbox({ artwork, onClose }: ArtworkLightboxProps) {
+  // cerrar con ESC
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [onClose])
+
   if (!artwork) return null
 
   return (
@@ -19,18 +35,42 @@ function ArtworkLightbox({ artwork, onClose }: ArtworkLightboxProps) {
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
-        cursor: 'pointer',
       }}
     >
-      <img
-        src={artwork.image}
-        alt={artwork.title || 'Artwork'}
+      {/* contenido (NO cierra) */}
+      <div
+        onClick={(e) => e.stopPropagation()}
         style={{
-          maxWidth: '90%',
-          maxHeight: '90%',
-          objectFit: 'contain',
+          position: 'relative',
         }}
-      />
+      >
+        <img
+          src={artwork.image}
+          alt={artwork.title || 'Artwork'}
+          style={{
+            maxWidth: '90vw',
+            maxHeight: '90vh',
+            objectFit: 'contain',
+          }}
+        />
+
+        {/* botón cerrar */}
+        <button
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            top: '-40px',
+            right: '0',
+            background: 'transparent',
+            border: 'none',
+            color: 'white',
+            fontSize: '24px',
+            cursor: 'pointer',
+          }}
+        >
+          ✕
+        </button>
+      </div>
     </div>
   )
 }
