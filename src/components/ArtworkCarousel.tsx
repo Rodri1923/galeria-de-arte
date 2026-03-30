@@ -17,40 +17,27 @@ function ArtworkCarousel({ artworks, title }: ArtworkCarouselProps) {
 
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
-  const [scrollProgress, setScrollProgress] = useState(0)
   const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null)
 
-  // navegación habilitada/deshabilitada
   const onSelect = useCallback(() => {
     if (!emblaApi) return
     setCanScrollPrev(emblaApi.canScrollPrev())
     setCanScrollNext(emblaApi.canScrollNext())
   }, [emblaApi])
 
-  // progreso de scroll
-  const onScroll = useCallback(() => {
-    if (!emblaApi) return
-    const progress = emblaApi.scrollProgress()
-    setScrollProgress(Math.max(0, Math.min(1, progress)))
-  }, [emblaApi])
-
-  // eventos Embla
   useEffect(() => {
     if (!emblaApi) return
 
     emblaApi.on('select', onSelect)
-    emblaApi.on('scroll', onScroll)
 
     requestAnimationFrame(() => {
       onSelect()
-      onScroll()
     })
 
     return () => {
       emblaApi.off('select', onSelect)
-      emblaApi.off('scroll', onScroll)
     }
-  }, [emblaApi, onSelect, onScroll])
+  }, [emblaApi, onSelect])
 
   const scrollPrev = () => emblaApi?.scrollPrev()
   const scrollNext = () => emblaApi?.scrollNext()
@@ -58,71 +45,104 @@ function ArtworkCarousel({ artworks, title }: ArtworkCarouselProps) {
   if (artworks.length === 0) return null
 
   return (
-    <section style={{ marginBottom: '3rem' }}>
-      <h3>{title}</h3>
+    <section className="mb-16 md:mb-20">
 
-      <div style={{ position: 'relative' }}>
-        <div style={{ overflow: 'hidden' }} ref={emblaRef}>
-          <div style={{ display: 'flex', gap: '16px' }}>
+      {/* HEADER */}
+      <div className="mb-10 md:mb-12 pl-16 md:pl-32">
+        <div className="flex items-center gap-4 mb-3">
+
+          <div className="w-12 h-px bg-gold" />
+
+          <h2 className="font-serif text-xs tracking-[0.35em] uppercase text-gold">
+            {title}
+          </h2>
+
+          <div className="w-12 h-px bg-gold" />
+
+        </div>
+      </div>
+
+      {/* WRAPPER */}
+      <div className="relative pl-16 md:pl-20 pr-6">
+
+        {/* LEFT BUTTON */}
+        <button
+          onClick={scrollPrev}
+          disabled={!canScrollPrev}
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full
+                     border border-black/10 bg-white/80 backdrop-blur-md
+                     flex items-center justify-center text-black
+                     hover:bg-white transition"
+        >
+          <ChevronLeft size={18} />
+        </button>
+
+        {/* RIGHT BUTTON */}
+        <button
+          onClick={scrollNext}
+          disabled={!canScrollNext}
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full
+                     border border-black/10 bg-white/80 backdrop-blur-md
+                     flex items-center justify-center text-black
+                     hover:bg-white transition"
+        >
+          <ChevronRight size={18} />
+        </button>
+
+        {/* CAROUSEL */}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-4">
+
             {artworks.map((artwork) => (
               <div
                 key={artwork.id}
                 onClick={() => setSelectedArtwork(artwork)}
-                style={{
-                  minWidth: '300px',
-                  flexShrink: 0,
-                  cursor: 'pointer',
-                }}
+                className="flex-[0_0_32%] max-w-[32%] cursor-pointer"
               >
-                <img
-                  src={artwork.image}
-                  alt={artwork.title || 'Artwork'}
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    display: 'block',
-                  }}
-                />
 
-                {artwork.title && <p>{artwork.title}</p>}
+                <div className="relative overflow-hidden group">
+
+                  <img
+                    src={artwork.image_url}
+                    alt={artwork.title || 'Artwork'}
+                    className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                  {(artwork.title || artwork.dimensions) && (
+                    <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+
+                      {artwork.title && (
+                        <div className="font-serif uppercase tracking-[0.12em] text-sm text-white mb-1">
+                          {artwork.title}
+                        </div>
+                      )}
+
+                      {artwork.dimensions && (
+                        <div className="text-xs tracking-[0.15em] text-white/80">
+                          {artwork.dimensions}
+                        </div>
+                      )}
+
+                    </div>
+                  )}
+
+                </div>
               </div>
             ))}
+
           </div>
         </div>
 
-        {/* Botones */}
-        <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
-          <button onClick={scrollPrev} disabled={!canScrollPrev}>
-            <ChevronLeft />
-          </button>
-
-          <button onClick={scrollNext} disabled={!canScrollNext}>
-            <ChevronRight />
-          </button>
+        {/* STATIC CENTER LINE (REEMPLAZO PROGRESS BAR) */}
+        <div className="mt-6 flex justify-center">
+          <div className="w-11/12 md:w-3/4 lg:w-2/3 h-[2px] bg-gold/40" />
         </div>
 
-        {/* Progress bar */}
-        <div style={{ marginTop: '12px' }}>
-          <div
-            style={{
-              height: '2px',
-              background: '#ddd',
-              width: '100%',
-            }}
-          >
-            <div
-              style={{
-                height: '2px',
-                background: '#000',
-                width: `${scrollProgress * 100}%`,
-                transition: 'width 0.1s linear',
-              }}
-            />
-          </div>
-        </div>
       </div>
 
-      {/* Lightbox */}
+      {/* LIGHTBOX */}
       <ArtworkLightbox
         artwork={selectedArtwork}
         onClose={() => setSelectedArtwork(null)}

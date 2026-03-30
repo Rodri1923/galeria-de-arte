@@ -1,31 +1,27 @@
-import GalleryNav from '../components/GalleryNav'
-import GallerySection from '../components/GallerySection'
-import HeroSection from '../components/HeroSection'
-import IntroSection from '../components/IntroSection'
-import FeaturedSection from '../components/FeaturedSection'
-import AlternatingSection from '../components/AlternatingSection'
-import GalleryFooter from '../components/GalleryFooter'
+import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
+import IntroSection from "@/components/IntroSection";
+import GallerySection from "@/components/GallerySection";
+import FeaturedSection from "@/components/FeaturedSection";
+import AlternatingSection from "@/components/AlternatingSection";
+import GalleryFooter from "@/components/GalleryFooter";
 
-function Home() {
+const Home = () => {
   return (
-    <>
-      <GalleryNav />
+    <div className="min-h-screen">
+      <Header />
 
       <main>
-      <h1 className="text-red-500 text-5xl bg-yellow-200">
-        Test Tailwind
-      </h1>
-
         <HeroSection />
         <IntroSection />
+        <GallerySection />
         <FeaturedSection />
         <AlternatingSection />
-        <GallerySection />
       </main>
 
       <GalleryFooter />
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default Home
+export default Home;

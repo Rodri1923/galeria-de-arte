@@ -1,59 +1,68 @@
-import heroImage from '../assets/images/artwork-1.jpg'
+import heroImage from "../assets/images/artwork-1.jpg"
 
 function HeroSection() {
   return (
     <section
-      style={{
-        position: 'relative',
-        height: '80vh',
-        overflow: 'hidden',
-      }}
+      id="hero-section"
+      className="relative w-full h-screen overflow-hidden"
     >
       {/* Imagen */}
       <img
         src={heroImage}
-        alt="Obra destacada"
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-        }}
+        alt="Hero"
+        className="absolute inset-0 w-full h-full object-cover"
       />
 
-      {/* Overlay oscuro */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'rgba(0,0,0,0.4)',
-        }}
-      />
+      {/* Overlay real (tu utility correcta) */}
+      <div className="gallery-overlay absolute inset-0" />
 
-      {/* Contenido */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          color: 'white',
-          textAlign: 'center',
-        }}
-      >
-        <h1
-          style={{
-            fontSize: '48px',
-            letterSpacing: '4px',
-          }}
+      {/* Contenido centrado */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
+        
+        {/* Frame */}
+        <div className="frame-border max-w-lg">
+
+          {/* Título */}
+          <h1 className="
+            font-serif
+            text-4xl md:text-6xl lg:text-7xl
+            tracking-wide
+            text-primary-foreground
+            leading-tight
+          ">
+            María Elida
+            <br />
+            Ultra
+          </h1>
+
+          {/* Línea dorada */}
+          <div className="w-12 h-px bg-gold mx-auto my-4" />
+
+          {/* Subtexto */}
+          <p className="
+            font-sans
+            text-sm md:text-base
+            tracking-[0.3em]
+            uppercase
+            text-primary-foreground/80
+            font-light
+          ">
+            Galería Personal
+          </p>
+
+        </div>
+
+        {/* Scroll indicator */}
+        <div
+          className="absolute bottom-10 animate-fadeIn opacity-0"
+          style={{ animationDelay: "1.5s" }}
         >
-          GALERÍA DE ARTE
-        </h1>
+          <div className="w-px h-12 bg-primary-foreground/40 mx-auto mb-2" />
+          <span className="text-primary-foreground/50 text-xs tracking-[0.2em] uppercase font-sans">
+            Scroll
+          </span>
+        </div>
 
-        <p style={{ marginTop: '16px' }}>
-          Obras originales
-        </p>
       </div>
     </section>
   )
