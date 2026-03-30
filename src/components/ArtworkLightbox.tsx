@@ -37,7 +37,7 @@ function ArtworkLightbox({ artwork, onClose }: ArtworkLightboxProps) {
         zIndex: 1000,
       }}
     >
-      {/* contenido (NO cierra) */}
+      {/* contenido */}
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
@@ -45,12 +45,13 @@ function ArtworkLightbox({ artwork, onClose }: ArtworkLightboxProps) {
         }}
       >
         <img
-          src={artwork.image}
+          src={artwork.image_url}
           alt={artwork.title || 'Artwork'}
           style={{
             maxWidth: '90vw',
             maxHeight: '90vh',
             objectFit: 'contain',
+            display: 'block',
           }}
         />
 
