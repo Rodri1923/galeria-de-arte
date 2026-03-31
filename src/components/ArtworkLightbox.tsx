@@ -6,13 +6,21 @@ interface ArtworkLightboxProps {
   onClose: () => void
 }
 
+// ============================================================
+// LIGHTBOX COMPONENT
+// ============================================================
+// Responsabilidad:
+// - Mostrar imagen en overlay fullscreen
+// - Cerrar con click externo o tecla ESC
+// - Render condicional (null si no hay artwork)
+// ============================================================
+
 function ArtworkLightbox({ artwork, onClose }: ArtworkLightboxProps) {
-  // cerrar con ESC
+  
+  // Cierre por teclado (Escape)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose()
-      }
+      if (e.key === 'Escape') onClose()
     }
 
     window.addEventListener('keydown', handleKeyDown)
@@ -22,6 +30,7 @@ function ArtworkLightbox({ artwork, onClose }: ArtworkLightboxProps) {
     }
   }, [onClose])
 
+  // No renderizar si no hay obra activa
   if (!artwork) return null
 
   return (
@@ -30,14 +39,15 @@ function ArtworkLightbox({ artwork, onClose }: ArtworkLightboxProps) {
       style={{
         position: 'fixed',
         inset: 0,
-        background: 'rgba(0,0,0,0.9)',
+        background: 'rgba(0,0,0,0.92)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 1000,
+        cursor: 'zoom-out',
       }}
     >
-      {/* contenido */}
+      {/* Contenedor de imagen (evita cierre accidental) */}
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
@@ -45,8 +55,8 @@ function ArtworkLightbox({ artwork, onClose }: ArtworkLightboxProps) {
         }}
       >
         <img
-          src={artwork.image_url}
-          alt={artwork.title || 'Artwork'}
+          src={artwork.image}
+          alt={artwork.title}
           style={{
             maxWidth: '90vw',
             maxHeight: '90vh',
@@ -55,9 +65,10 @@ function ArtworkLightbox({ artwork, onClose }: ArtworkLightboxProps) {
           }}
         />
 
-        {/* botón cerrar */}
+        {/* Botón cerrar */}
         <button
           onClick={onClose}
+          aria-label="Cerrar visor de imagen"
           style={{
             position: 'absolute',
             top: '-40px',

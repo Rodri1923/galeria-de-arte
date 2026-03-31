@@ -1,26 +1,78 @@
 import type { Artwork } from '../types/artwork'
 
-import img1 from '../assets/images/artwork-1.jpg'
-import img2 from '../assets/images/artwork-2.jpg'
-import img3 from '../assets/images/artwork-3.jpg'
+// ============================================================
+// ARTWORKS DATA SOURCE
+// ============================================================
+// Este archivo controla TODAS las obras de la galería.
+//
+// - Todas las imágenes viven en /public/artworks
+// - Convención de naming: 001.jpg, 002.jpg, 003.jpg...
+// - Este sistema evita imports y facilita reemplazo masivo.
+//
+// Para cambiar una imagen:
+// -> solo modificar el string "image"
+//
+// Para agregar una obra:
+// -> copiar objeto y cambiar:
+//    id, image, title, category, display_order
+//
+// IMPORTANTE:
+// - display_order controla orden visual en UI
+// - category se usa para filtros (marinas, bodegones, etc.)
+// - is_featured controla si aparece en destacados
+// ============================================================
 
 export const artworks: Artwork[] = [
   {
     id: '1',
-    image: img1,
+    image: '/artworks/001.jpg',
     title: 'Obra 1',
+
+    // Precio opcional (puede usarse en futuras features de venta)
+    price: null,
+
+    // Descripción opcional (detalle curatorial o técnico)
+    description: null,
+
+    // Control de highlight en UI
+    is_featured: false,
+
+    // Orden manual en grilla o carrusel
+    display_order: 1,
+
+    // Metadata futura (API / CMS compatible)
+    created_at: '',
+
+    // Categoría usada para filtros en galería
     category: 'marinas',
+
+    // Dimensiones físicas de la obra (opcional)
+    dimensions: null,
   },
+
   {
     id: '2',
-    image: img2,
+    image: '/artworks/002.jpg',
     title: 'Obra 2',
+    price: null,
+    description: null,
+    is_featured: false,
+    display_order: 2,
+    created_at: '',
     category: 'bodegones',
+    dimensions: null,
   },
+
   {
     id: '3',
-    image: img3,
+    image: '/artworks/003.jpg',
     title: 'Obra 3',
+    price: null,
+    description: null,
+    is_featured: false,
+    display_order: 3,
+    created_at: '',
     category: 'taperas',
+    dimensions: null,
   },
 ]

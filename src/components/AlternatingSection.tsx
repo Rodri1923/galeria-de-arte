@@ -1,7 +1,8 @@
-import artwork1 from '../assets/images/artwork-1.jpg'
-import artwork2 from '../assets/images/artwork-3.jpg'
+import { siteContent } from "../content/siteContent"
 
 function AlternatingSection() {
+  const { alternatingSection } = siteContent
+
   return (
     <section className="bg-background py-24">
 
@@ -13,15 +14,17 @@ function AlternatingSection() {
           {/* IMAGE 1 */}
           <div className="absolute top-0 left-0 w-[78%] h-[62%] overflow-hidden z-10">
             <img
-              src={artwork1}
+              src={alternatingSection.leftImage}
+              alt="Obra izquierda"
               className="w-full h-full object-cover"
             />
           </div>
 
-          {/* IMAGE 2 (OFFSET DIAGONAL REAL) */}
+          {/* IMAGE 2 */}
           <div className="absolute bottom-0 right-0 w-[78%] h-[62%] overflow-hidden z-20 translate-x-2 translate-y-2">
             <img
-              src={artwork2}
+              src={alternatingSection.rightImage}
+              alt="Obra derecha"
               className="w-full h-full object-cover"
             />
           </div>

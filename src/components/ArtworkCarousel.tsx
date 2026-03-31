@@ -29,6 +29,8 @@ function ArtworkCarousel({ artworks, title }: ArtworkCarouselProps) {
     if (!emblaApi) return
 
     emblaApi.on('select', onSelect)
+    emblaApi.on('reInit', onSelect)
+    emblaApi.on('resize', onSelect)
 
     requestAnimationFrame(() => {
       onSelect()
@@ -36,6 +38,8 @@ function ArtworkCarousel({ artworks, title }: ArtworkCarouselProps) {
 
     return () => {
       emblaApi.off('select', onSelect)
+      emblaApi.off('reInit', onSelect)
+      emblaApi.off('resize', onSelect)
     }
   }, [emblaApi, onSelect])
 
@@ -50,15 +54,11 @@ function ArtworkCarousel({ artworks, title }: ArtworkCarouselProps) {
       {/* HEADER */}
       <div className="mb-10 md:mb-12 pl-16 md:pl-32">
         <div className="flex items-center gap-4 mb-3">
-
           <div className="w-12 h-px bg-gold" />
-
           <h2 className="font-serif text-xs tracking-[0.35em] uppercase text-gold">
             {title}
           </h2>
-
           <div className="w-12 h-px bg-gold" />
-
         </div>
       </div>
 
@@ -69,10 +69,11 @@ function ArtworkCarousel({ artworks, title }: ArtworkCarouselProps) {
         <button
           onClick={scrollPrev}
           disabled={!canScrollPrev}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full
+          className={`absolute left-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full
                      border border-black/10 bg-white/80 backdrop-blur-md
                      flex items-center justify-center text-black
-                     hover:bg-white transition"
+                     hover:bg-white transition
+                     ${!canScrollPrev ? "opacity-30 cursor-not-allowed" : ""}`}
         >
           <ChevronLeft size={18} />
         </button>
@@ -81,10 +82,11 @@ function ArtworkCarousel({ artworks, title }: ArtworkCarouselProps) {
         <button
           onClick={scrollNext}
           disabled={!canScrollNext}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full
+          className={`absolute right-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full
                      border border-black/10 bg-white/80 backdrop-blur-md
                      flex items-center justify-center text-black
-                     hover:bg-white transition"
+                     hover:bg-white transition
+                     ${!canScrollNext ? "opacity-30 cursor-not-allowed" : ""}`}
         >
           <ChevronRight size={18} />
         </button>
@@ -103,7 +105,7 @@ function ArtworkCarousel({ artworks, title }: ArtworkCarouselProps) {
                 <div className="relative overflow-hidden group">
 
                   <img
-                    src={artwork.image_url}
+                    src={artwork.image}
                     alt={artwork.title || 'Artwork'}
                     className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
                   />
@@ -129,13 +131,14 @@ function ArtworkCarousel({ artworks, title }: ArtworkCarouselProps) {
                   )}
 
                 </div>
+
               </div>
             ))}
 
           </div>
         </div>
 
-        {/* STATIC CENTER LINE (REEMPLAZO PROGRESS BAR) */}
+        {/* STATIC LINE */}
         <div className="mt-6 flex justify-center">
           <div className="w-11/12 md:w-3/4 lg:w-2/3 h-[2px] bg-gold/40" />
         </div>
@@ -147,6 +150,7 @@ function ArtworkCarousel({ artworks, title }: ArtworkCarouselProps) {
         artwork={selectedArtwork}
         onClose={() => setSelectedArtwork(null)}
       />
+
     </section>
   )
 }

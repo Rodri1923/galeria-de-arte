@@ -1,4 +1,4 @@
-import heroImage from "../assets/images/artwork-1.jpg"
+import { siteContent } from "../content/siteContent"
 
 function HeroSection() {
   return (
@@ -8,17 +8,17 @@ function HeroSection() {
     >
       {/* Imagen */}
       <img
-        src={heroImage}
+        src={siteContent.hero.image}
         alt="Hero"
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      {/* Overlay real (tu utility correcta) */}
+      {/* Overlay */}
       <div className="gallery-overlay absolute inset-0" />
 
       {/* Contenido centrado */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
-        
+
         {/* Frame */}
         <div className="frame-border max-w-lg">
 

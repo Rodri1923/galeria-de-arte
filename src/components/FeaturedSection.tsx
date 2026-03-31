@@ -1,9 +1,11 @@
-import artworkImage from '../assets/images/artwork-2.jpg'
+import { siteContent } from "../content/siteContent"
 
 function FeaturedSection() {
+  const { featured } = siteContent
+
   return (
     <section className="bg-canvas py-16 md:py-28 px-6">
-      
+
       <div className="max-w-5xl mx-auto">
 
         {/* Header */}
@@ -23,7 +25,7 @@ function FeaturedSection() {
           {/* Imagen */}
           <div className="md:w-2/3">
             <img
-              src={artworkImage}
+              src={featured.image}
               alt="Obra destacada"
               className="w-full h-auto block"
             />
@@ -44,7 +46,9 @@ function FeaturedSection() {
             </p>
 
           </div>
+
         </div>
+
       </div>
     </section>
   )

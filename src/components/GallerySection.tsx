@@ -1,108 +1,14 @@
 import ArtworkCarousel from "./ArtworkCarousel";
+import { artworks } from "../data/artworks";
 
-import artwork1 from "@/assets/images/artwork-1.jpg";
-import artwork2 from "@/assets/images/artwork-2.jpg";
-import artwork3 from "@/assets/images/artwork-3.jpg";
-
-type Artwork = {
-  id: string;
-  title: string;
-  price: string | null;
-  description: string | null;
-  image_url: string;
-  is_featured: boolean;
-  display_order: number;
-  created_at: string;
-  category: string;
-  dimensions: string | null;
-};
-
-const artworks: Artwork[] = [
-  {
-    id: "1",
-    title: "Puerto Mediterráneo",
-    price: null,
-    description: null,
-    image_url: artwork2,
-    is_featured: false,
-    display_order: 0,
-    created_at: "",
-    category: "marinas",
-    dimensions: null,
-  },
-  {
-    id: "2",
-    title: "Jardín de Rosas",
-    price: "€2,400",
-    description: null,
-    image_url: artwork1,
-    is_featured: false,
-    display_order: 1,
-    created_at: "",
-    category: "bodegones",
-    dimensions: null,
-  },
-  {
-    id: "3",
-    title: "Catedral al Atardecer",
-    price: null,
-    description: null,
-    image_url: artwork3,
-    is_featured: false,
-    display_order: 2,
-    created_at: "",
-    category: "marinas",
-    dimensions: null,
-  },
-  {
-    id: "4",
-    title: "Muchacha en el Trigal",
-    price: "€3,800",
-    description: null,
-    image_url: artwork1,
-    is_featured: false,
-    display_order: 3,
-    created_at: "",
-    category: "taperas",
-    dimensions: null,
-  },
-  {
-    id: "5",
-    title: "Flores Silvestres",
-    price: null,
-    description: null,
-    image_url: artwork2,
-    is_featured: false,
-    display_order: 4,
-    created_at: "",
-    category: "bodegones",
-    dimensions: null,
-  },
-  {
-    id: "6",
-    title: "Bosque de Otoño",
-    price: null,
-    description: null,
-    image_url: artwork3,
-    is_featured: false,
-    display_order: 5,
-    created_at: "",
-    category: "taperas",
-    dimensions: null,
-  },
-  {
-    id: "7",
-    title: "Canales de Venecia",
-    price: "€4,200",
-    description: null,
-    image_url: artwork2,
-    is_featured: false,
-    display_order: 6,
-    created_at: "",
-    category: "marinas",
-    dimensions: null,
-  },
-];
+// ============================================================
+// GALLERY SECTION
+// ============================================================
+// Responsabilidad:
+// - Renderizar carruseles por categoría
+// - Consumir data centralizada (artworks.ts)
+// - No contiene assets ni data duplicada
+// ============================================================
 
 const CATEGORIES = [
   { key: "todas", label: "Todas las Obras" },
