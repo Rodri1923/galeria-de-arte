@@ -7,6 +7,15 @@ function Header() {
   const toggleMenu = () => setOpen((v) => !v)
   const closeMenu = () => setOpen(false)
 
+  // 🔹 SCROLL A SECCIÓN
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id)
+    if (!el) return
+
+    el.scrollIntoView({ behavior: "smooth" })
+    closeMenu()
+  }
+
   useEffect(() => {
     const hero = document.getElementById("hero-section")
     if (!hero) return
@@ -53,9 +62,9 @@ function Header() {
           aria-label="Menu"
           className="flex flex-col justify-center gap-[5px] w-[28px] h-[24px]"
         >
-          <span className={`h-[2px] w-full bg-current transition-all ${textColor}`} />
-          <span className={`h-[2px] w-full bg-current transition-all ${textColor}`} />
-          <span className={`h-[2px] w-full bg-current transition-all ${textColor}`} />
+          <span className={`h-[2px] w-full bg-current ${textColor}`} />
+          <span className={`h-[2px] w-full bg-current ${textColor}`} />
+          <span className={`h-[2px] w-full bg-current ${textColor}`} />
         </button>
       </header>
 
@@ -76,11 +85,11 @@ function Header() {
               shadow-[-10px_0_30px_rgba(0,0,0,0.1)]
             "
           >
-            <MenuItem label="Inicio" onClick={closeMenu} />
-            <MenuItem label="Galeria" onClick={closeMenu} />
-            <MenuItem label="Obras Destacadas" onClick={closeMenu} />
-            <MenuItem label="Sobre la Artista" onClick={closeMenu} />
-            <MenuItem label="Contacto" onClick={closeMenu} />
+            <MenuItem label="Inicio" onClick={() => scrollToSection("hero-section")} />
+            <MenuItem label="Galeria" onClick={() => scrollToSection("gallery-section")} />
+            <MenuItem label="Obras Destacadas" onClick={() => scrollToSection("featured-section")} />
+            <MenuItem label="Sobre la Artista" onClick={() => scrollToSection("about-section")} />
+            <MenuItem label="Contacto" onClick={() => scrollToSection("contact-section")} />
           </nav>
         </div>
       )}

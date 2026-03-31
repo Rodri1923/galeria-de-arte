@@ -4,7 +4,9 @@ function FeaturedSection() {
   const { featured } = siteContent
 
   return (
-    <section className="bg-canvas py-16 md:py-28 px-6">
+    <section 
+      id="featured-section"
+      className="bg-canvas py-16 md:py-28 px-6">
 
       <div className="max-w-5xl mx-auto">
 
@@ -23,11 +25,16 @@ function FeaturedSection() {
         <div className="md:flex md:gap-12 md:items-start">
 
           {/* Imagen */}
-          <div className="md:w-2/3">
+          <div className="md:w-2/3 flex justify-center">
             <img
               src={featured.image}
               alt="Obra destacada"
-              className="w-full h-auto block"
+              className="
+                max-w-full
+                max-h-[80vh]
+                object-contain
+                block
+              "
             />
           </div>
 

@@ -1,6 +1,8 @@
 const IntroSection = () => {
   return (
-    <section className="bg-canvas py-20 md:py-32 px-6">
+    <section 
+      id="about-section"
+      className="bg-canvas py-20 md:py-32 px-6">
       
       <div className="max-w-2xl mx-auto md:ml-[15%] lg:ml-[20%]">
         

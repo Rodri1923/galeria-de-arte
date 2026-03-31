@@ -19,7 +19,9 @@ const CATEGORIES = [
 
 const GallerySection = () => {
   return (
-    <section className="bg-background py-16 md:py-24">
+    <section 
+      id="gallery-section"
+      className="bg-background py-16 md:py-24">
 
       {/* HEADER */}
       <div className="text-center mb-12 md:mb-16">

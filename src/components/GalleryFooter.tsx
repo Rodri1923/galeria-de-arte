@@ -1,6 +1,8 @@
 function GalleryFooter() {
   return (
-    <footer className="bg-[#3d2d21] py-16 px-6 mt-20">
+    <footer 
+      id="contact-section"
+      className="bg-[#3d2d21] py-16 px-6 mt-20">
 
       <div className="max-w-4xl mx-auto text-center">
 

@@ -1,43 +1,52 @@
 // ============================================================
 // SITE CONTENT CONFIGURATION
 // ============================================================
-// Este archivo centraliza imágenes de layout del sitio.
+// Centraliza TODAS las imágenes de layout del sitio.
 //
-// IMPORTANTE:
-// - NO contiene la galería de artworks (eso vive en /data/artworks)
-// - Solo controla imágenes estructurales del diseño (hero, secciones)
-// - Todas las rutas apuntan a /public (accesibles como /artworks/...)
-// - Evitar reutilizar la misma imagen en múltiples secciones
-//   salvo decisión explícita de diseño
+// ESTRUCTURA:
+// /public/
+//   /artworks  → galería (data dinámica)
+//   /site      → layout (hero, secciones, destacados)
+//
+// REGLA CLAVE:
+// - NO mezclar artworks con layout
+// - NO usar imports de imágenes
+// - SOLO rutas absolutas desde /public
+//
+// CÓMO CAMBIAR IMÁGENES:
+// - Reemplazar archivo en /public/site
+// - O cambiar la ruta aquí
 // ============================================================
 
 export const siteContent = {
   // =========================
-  // HERO SECTION (PORTADA)
+  // HERO SECTION
   // =========================
   // Imagen principal del landing.
-  // Impacto visual alto. Idealmente una pieza fuerte o representativa.
+  // Debe ser visualmente fuerte (impacto inicial).
   hero: {
-    image: '/artworks/001.jpg',
+    image: '/site/hero.jpg',
   },
 
   // =========================
   // ALTERNATING SECTION
   // =========================
-  // Layout visual secundario con composición en dos bloques.
+  // Composición diagonal de 2 imágenes.
   // leftImage  → bloque superior izquierdo
   // rightImage → bloque inferior derecho
   alternatingSection: {
-    leftImage: '/artworks/002.jpg',
-    rightImage: '/artworks/003.jpg',
+    leftImage: '/site/alt-left.jpg',
+    rightImage: '/site/alt-right.jpg',
   },
 
   // =========================
   // FEATURED SECTION
   // =========================
-  // Imagen destacada independiente del hero.
-  // Usada para spotlight editorial o highlight artístico.
+  // Imagen destacada editorial.
+  // No debería repetirse con hero salvo intención.
   featured: {
-    image: '/artworks/003.jpg',
+    image: '/site/featured.jpg',
   },
 } as const
+
+export type SiteContent = typeof siteContent
