@@ -107,6 +107,8 @@ function ArtworkCarousel({ artworks, title }: ArtworkCarouselProps) {
                   <img
                     src={artwork.image}
                     alt={artwork.title || 'Artwork'}
+                    loading="lazy"        // ✅ LAZY LOADING
+                    decoding="async"     // ✅ mejora performance de render
                     className="w-full h-auto block transition-transform duration-700 group-hover:scale-105"
                   />
 
