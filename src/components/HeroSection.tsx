@@ -59,7 +59,7 @@ function HeroSection() {
         >
           <div className="w-px h-12 bg-primary-foreground/40 mx-auto mb-2" />
           <span className="text-primary-foreground/50 text-xs tracking-[0.2em] uppercase font-sans">
-            Scroll
+            Deslizar
           </span>
         </div>
 

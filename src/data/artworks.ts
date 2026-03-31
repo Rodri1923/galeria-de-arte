@@ -26,7 +26,7 @@ export const artworks: Artwork[] = [
   {
     id: '1',
     image: '/artworks/001.jpg',
-    title: 'Obra 1',
+    title: 'Camino del Rosedal',
 
     // Precio opcional (puede usarse en futuras features de venta)
     price: null,
@@ -44,29 +44,29 @@ export const artworks: Artwork[] = [
     created_at: '',
 
     // Categoría usada para filtros en galería
-    category: 'marinas',
+    category: '',
 
     // Dimensiones físicas de la obra (opcional)
-    dimensions: null,
+    dimensions: '57cm x 73cm',
   },
 
   {
     id: '2',
     image: '/artworks/002.jpg',
-    title: 'Obra 2',
+    title: 'Puerto Italia',
     price: null,
     description: null,
     is_featured: false,
     display_order: 2,
     created_at: '',
-    category: 'bodegones',
+    category: 'marinas',
     dimensions: null,
   },
 
   {
     id: '3',
     image: '/artworks/003.jpg',
-    title: 'Obra 3',
+    title: 'Madre Tierra',
     price: null,
     description: null,
     is_featured: false,
@@ -74,5 +74,31 @@ export const artworks: Artwork[] = [
     created_at: '',
     category: 'taperas',
     dimensions: null,
+  },
+
+  {
+    id: '4',
+    image: '/artworks/004.jpg',
+    title: 'Castillo Escondido',
+    price: null,
+    description: null,
+    is_featured: false,
+    display_order: 4,
+    created_at: '',
+    category: 'taperas',
+    dimensions: null,
+  },
+
+  {
+    id: '5',
+    image: '/artworks/005.jpg',
+    title: 'Atardecer campestre',
+    price: null,
+    description: null,
+    is_featured: false,
+    display_order: 5,
+    created_at: '',
+    category: 'bodegones',
+    dimensions: '160cm x 50cm',
   },
 ]
