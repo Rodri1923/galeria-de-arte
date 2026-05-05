@@ -1,73 +1,206 @@
-# React + TypeScript + Vite
+# 🎨 Galería de Arte — María Elida Ultra
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sitio web artístico desarrollado en React + Vite para exhibición de obras pictóricas.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Demo
 
-## React Compiler
+👉 https://rodri1923.github.io/galeria-de-arte/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🧱 Stack técnico
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* Embla Carousel
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📁 Estructura del proyecto
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+/public
+  /artworks   → imágenes de obras (galería)
+  /site       → imágenes de layout (hero, secciones)
+
+/src
+  /components → UI (Hero, Gallery, etc.)
+  /content    → configuración visual del sitio
+  /data       → datos de obras
+  /types      → tipado TypeScript
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧠 Arquitectura
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+El proyecto separa **contenido**, **datos** y **presentación**:
+
+### 1. `siteContent.ts`
+
+Controla imágenes estructurales del layout:
+
+* Hero
+* Alternating section
+* Featured
+
+👉 No contiene artworks
+
+---
+
+### 2. `artworks.ts`
+
+Fuente de datos de la galería:
+
+* imágenes
+* categorías
+* orden
+* metadata
+
+👉 Escalable a futuro (API / CMS)
+
+---
+
+### 3. `/public`
+
+Todas las imágenes viven aquí:
+
+* `/artworks` → galería
+* `/site` → layout
+
+👉 No se usan imports de imágenes
+👉 Se usan rutas públicas
+
+---
+
+## 🖼️ Cómo agregar nuevas obras
+
+### 1. Subir imagen
+
+```bash
+/public/artworks/006.jpg
 ```
+
+---
+
+### 2. Editar `artworks.ts`
+
+```ts
+{
+  id: '6',
+  image: BASE + 'artworks/006.jpg',
+  title: 'Nombre de la obra',
+  price: null,
+  description: null,
+  is_featured: false,
+  display_order: 6,
+  created_at: '',
+  category: 'marinas',
+  dimensions: '80 x 60 cm',
+}
+```
+
+---
+
+## 🧩 Categorías disponibles
+
+* `todas`
+* `marinas`
+* `taperas`
+* `bodegones`
+* `otros`
+
+---
+
+## 🧭 Cómo cambiar imágenes del sitio
+
+Editar:
+
+```bash
+/src/content/siteContent.ts
+```
+
+Ejemplo:
+
+```ts
+hero: {
+  image: BASE + 'site/hero.jpg',
+}
+```
+
+---
+
+## ⚠️ IMPORTANTE — GitHub Pages
+
+El proyecto usa:
+
+```ts
+import.meta.env.BASE_URL
+```
+
+👉 necesario porque GitHub Pages sirve el sitio desde:
+
+```
+/galeria-de-arte/
+```
+
+---
+
+## 🚀 Deploy
+
+### Build
+
+```bash
+npm run build
+```
+
+---
+
+### Deploy
+
+```bash
+npm run deploy
+```
+
+👉 publica en branch `gh-pages`
+
+---
+
+## 🔄 Flujo de actualización
+
+```bash
+git add .
+git commit -m "feat: agregar nuevas obras"
+git push
+npm run deploy
+```
+
+---
+
+## ⚡ Performance
+
+* Lazy loading en imágenes no críticas
+* Hero optimizado (above-the-fold)
+* Assets estáticos desde `/public`
+
+---
+
+## 📌 Mejoras futuras
+
+* Compresión de imágenes
+* SEO (meta tags, Open Graph)
+* Páginas individuales por obra
+* CMS o integración API
+* Deploy automático (GitHub Actions)
+
+---
+
+## 👤 Autor
+
+Proyecto desarrollado por Rodrigo Navone.
+
+---
